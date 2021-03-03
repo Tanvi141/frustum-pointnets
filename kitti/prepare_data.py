@@ -145,7 +145,7 @@ def random_shift_box2d(box2d, shift_ratio=0.1):
     return np.array([cx2-w2/2.0, cy2-h2/2.0, cx2+w2/2.0, cy2+h2/2.0])
  
 def extract_frustum_data(idx_filename, split, output_filename, viz=False,
-                       perturb_box2d=False, augmentX=1, type_whitelist=['Car']):
+                       perturb_box2d=False, augmentX=1, type_whitelist=['Box']):
     ''' Extract point clouds and corresponding annotations in frustums
         defined generated from 2D bounding boxes
         Lidar points and 3d boxes are in *rect camera* coord system
@@ -302,7 +302,7 @@ def get_box3d_dim_statistics(idx_filename):
 
 def read_det_file(det_filename):
     ''' Parse lines in 2D detection output files '''
-    det_id2str = {1:'Pedestrian', 2:'Car', 3:'Cyclist'}
+    det_id2str = {1:'Box', 2:'Shelf', 3:'Cyclist'}
     id_list = []
     type_list = []
     prob_list = []
@@ -318,7 +318,7 @@ def read_det_file(det_filename):
  
 def extract_frustum_data_rgb_detection(det_filename, split, output_filename,
                                        viz=False,
-                                       type_whitelist=['Car'],
+                                       type_whitelist=['Box'],
                                        img_height_threshold=25,
                                        lidar_point_threshold=5):
     ''' Extract point clouds in frustums extruded from 2D detection boxes.
@@ -475,10 +475,10 @@ if __name__=='__main__':
         exit()
 
     if args.car_only:
-        type_whitelist = ['Car']
+        type_whitelist = ['Box']
         output_prefix = 'frustum_caronly_'
     else:
-        type_whitelist = ['Car', 'Pedestrian', 'Cyclist']
+        type_whitelist = ['Box', 'Shelf','Cyclist']
         output_prefix = 'frustum_carpedcyc_'
 
     if args.gen_train:

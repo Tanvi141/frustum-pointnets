@@ -16,7 +16,7 @@ class Object3d(object):
         data[1:] = [float(x) for x in data[1:]]
 
         # extract label, truncation, occlusion
-        self.type = data[0] # 'Car', 'Pedestrian', ...
+        self.type = data[0] # 'Box', 'Shelf'
         self.truncation = data[1] # truncated pixel ratio [0..1]
         self.occlusion = int(data[2]) # 0=visible, 1=partly occluded, 2=fully occluded, 3=unknown
         self.alpha = data[3] # object observation angle [-pi..pi]
